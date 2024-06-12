@@ -1,6 +1,6 @@
 const noteModel = require('../models/notesModel');
 async function createNote(req,res){
-    console.log('this is create note testing',req.userid);
+    console.log('create note',req.userid);
 
     const {title,description} = req.body;
     if(!title || !description ){
@@ -26,7 +26,7 @@ async function createNote(req,res){
     }
 }
 async function getNotes(req,res){
-    console.log('this is get note testing', req.userid);
+    console.log('get note', req.userid);
 
     try {
         const notes = await noteModel.find({ userId: req.userid });

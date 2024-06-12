@@ -3,16 +3,12 @@ const bycript = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
-const secretKey = 'i will become great developer';
-
-// all test cases are done by me manually by using postman locally 
-
+const secretKey = 'secrectttt';
 
 
 async function signUp (req,res){
     const {username,userMail,userPassword} = req.body;
     try{
-        // test case passed
         if(!username || !userMail || !userPassword){
             return res.status(400).json({
                 message: "all feild are required"
@@ -20,7 +16,6 @@ async function signUp (req,res){
         }
         const existingUser = await userModel.findOne({email:userMail});
 
-        // test case passed this working
 
         if(existingUser){
             return res.status(400).json({
@@ -29,7 +24,6 @@ async function signUp (req,res){
         }
         const hashedPassword = await  bycript.hash(userPassword,10);
 
-        // test case passed user is created 
         const result = await userModel.create({
             username: username,
             email:userMail,
@@ -40,7 +34,6 @@ async function signUp (req,res){
             email: result.username,
             id: result._id
         },secretKey);
-        // test case working successfully 
         return res.status(200).json({
             message:"successfully created account",
             token : token
