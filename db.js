@@ -1,18 +1,10 @@
-
 const mongoose = require('mongoose');
 require('dotenv').config();
-
-
 
 const mongoConnectionApi = process.env.MONGOURL;
 mongoose.connect(mongoConnectionApi,{});
 
-
-
-
 const db = mongoose.connection;
-
-
 db.on('connected',()=>{
     console.log('connected to database');
 });
